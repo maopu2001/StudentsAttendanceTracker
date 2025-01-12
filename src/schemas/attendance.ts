@@ -18,10 +18,10 @@ const AttendanceSchema: Schema<IAttendance> = new Schema({
   },
   status: {
     type: String,
-    enum: ['present', 'absent'],
-    default: 'absent',
+    enum: ['Present', 'Absent'],
+    default: 'Absent',
     required: true,
   },
 });
 
-export default mongoose.models.Attendances || mongoose.model<IAttendance>('Attendances', AttendanceSchema);
+export default AttendanceSchema;

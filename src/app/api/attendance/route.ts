@@ -1,5 +1,5 @@
 import { connectDB } from '@/lib/connectDB';
-import Attendance from '@/schemas/attendance';
+import { Attendances } from '@/schemas';
 import { NextResponse, NextRequest } from 'next/server';
 
 async function GET(req: NextRequest) {
@@ -14,7 +14,7 @@ async function GET(req: NextRequest) {
       return NextResponse.json({ message: 'CourseId or AttendanceId is not given' }, { status: 500 });
     }
 
-    const attendances = await Attendance.find({ course: courseId, date: attendanceDate });
+    const attendances = await Attendances.find({ course: courseId, date: attendanceDate });
 
     if (attendances.length > 0)
       return NextResponse.json({ message: 'Attendance already exist', attendances }, { status: 200 });

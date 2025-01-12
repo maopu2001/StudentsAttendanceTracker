@@ -1,6 +1,5 @@
 import { connectDB } from '@/lib/connectDB';
-import Courses from '@/schemas/courses';
-import Teachers from '@/schemas/teachers';
+import { Courses, Teachers } from '@/schemas';
 import { NextRequest, NextResponse } from 'next/server';
 
 async function POST(req: NextRequest) {

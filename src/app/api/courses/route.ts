@@ -1,6 +1,5 @@
 import { connectDB } from '@/lib/connectDB';
-import Courses from '@/schemas/courses';
-import Teachers from '@/schemas/teachers';
+import { Courses, Teachers } from '@/schemas';
 import { NextRequest, NextResponse } from 'next/server';
 
 async function POST(req: NextRequest) {
@@ -42,6 +41,9 @@ async function GET(req: NextRequest) {
 
     if (teacherId) {
       const teacher = await Teachers.findById(teacherId);
+      if (!teacher) {
+        return NextResponse.json({ message: 'Teacher not found' }, { status: 404 });
+      }
       return NextResponse.json({ courses: teacher.courses }, { status: 200 });
     }
 

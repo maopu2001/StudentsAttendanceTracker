@@ -28,4 +28,4 @@ const TeachersSchema: Schema<ITeachers> = new Schema({
   ],
 });
 
-export default mongoose.models.Teachers || mongoose.model<ITeachers>('Teachers', TeachersSchema);
+export default TeachersSchema;

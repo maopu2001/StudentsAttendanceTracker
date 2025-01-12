@@ -1,17 +1,41 @@
-import mongoose from 'mongoose';
+import { intializeSchemas } from '@/schemas';
+import mongoose, { Mongoose } from 'mongoose';
 
-let isConnected = false; // Track the connection status
+export const connectDB = async () => {
+  let cached = (
+    global as typeof globalThis & { mongoose: { conn: Mongoose | null; promise: Promise<Mongoose> | null } }
+  ).mongoose;
 
-export async function connectDB() {
-  if (isConnected) {
-    return;
+  if (!cached) {
+    cached = (
+      global as typeof globalThis & { mongoose: { conn: Mongoose | null; promise: Promise<Mongoose> | null } }
+    ).mongoose = {
+      conn: null,
+      promise: null,
+    };
   }
 
-  try {
-    const db = await mongoose.connect(process.env.MONGODB_URI);
-    isConnected = db.connections[0].readyState === 1;
-    console.log('MongoDB connected');
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
+  if (cached.conn) {
+    return cached.conn;
   }
-}
+
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false,
+    };
+
+    cached.promise = mongoose
+      .connect(process.env.MONGODB_URI, opts)
+      .then((mongoose) => {
+        intializeSchemas();
+        return mongoose;
+      })
+      .catch((err) => {
+        console.error('There is an error while connecting to MongoDB:', err.message);
+        throw err;
+      });
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+};

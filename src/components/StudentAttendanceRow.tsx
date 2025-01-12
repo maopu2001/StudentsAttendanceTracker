@@ -31,15 +31,15 @@ export default function StudentAttendanceRow({ studentStatus, setStudentStatusLi
     });
   }, [status, setStudentStatusList, studentStatus.studentId]);
 
-  const changeStatus = () => (status === 'absent' ? setStatus('present') : setStatus('absent'));
+  const changeStatus = () => (status === 'Absent' ? setStatus('Present') : setStatus('Absent'));
 
   return (
     <div className="flex text-center *:border">
       <div className="text-left px-2 w-[25%] py-1">{studentStatus.name}</div>
       <div className="w-[25%] py-1">{studentStatus.regNo}</div>
-      <div className="w-[25%] py-1">{status ? 'Present' : 'Absent'}</div>
+      <div className="w-[25%] py-1">{status}</div>
       <div className="w-[25%] py-1">
-        <Switch onClick={changeStatus} />
+        <Switch onClick={changeStatus} defaultChecked={status === 'Present'} />
       </div>
     </div>
   );

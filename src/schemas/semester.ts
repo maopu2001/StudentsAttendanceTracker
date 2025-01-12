@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
-import { ISemester } from '@/types/ISchemas';
+import { ISemesters } from '@/types/ISchemas';
 
-const SemestersSchema: Schema<ISemester> = new mongoose.Schema({
+const SemestersSchema: Schema<ISemesters> = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -12,4 +12,4 @@ const SemestersSchema: Schema<ISemester> = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.Semesters || mongoose.model<ISemester>('Semesters', SemestersSchema);
+export default SemestersSchema;

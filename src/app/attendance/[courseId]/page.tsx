@@ -1,10 +1,11 @@
 'use client';
 import AddNewAttendance from '@/components/AddNewAttendance';
 import AttendanceTable from '@/components/AttendanceSummaryTable';
-import React, { use, useState } from 'react';
+import { useParams } from 'next/navigation';
+import React, { useState } from 'react';
 
-export default function Attendance({ params }: { params: Promise<{ courseId: string }> }) {
-  const { courseId } = use(params);
+export default function Attendance() {
+  const { courseId } = useParams();
   const [selectedTab, setSelectedTab] = useState(<AttendanceTable />);
 
   return (
@@ -17,7 +18,7 @@ export default function Attendance({ params }: { params: Promise<{ courseId: str
           Attendance Summary
         </button>
         <button
-          onClick={() => setSelectedTab(<AddNewAttendance courseId={courseId} />)}
+          onClick={() => setSelectedTab(<AddNewAttendance courseId={courseId as string} />)}
           className="border py-2 px-2 bg-blue-200 rounded-xl hover:bg-blue-300"
         >
           Add

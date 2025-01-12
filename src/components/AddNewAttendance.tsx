@@ -15,7 +15,7 @@ export default function AddNewAttendance({ courseId }: { courseId: string }) {
   const [date, setDate] = useState<Date>();
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data: attendanceData, error: attendanceError } = useQuery({
+  const { error: attendanceError } = useQuery({
     queryKey: ['attendanceDate'],
     queryFn: async () => {
       if (!date) return;
@@ -47,7 +47,6 @@ export default function AddNewAttendance({ courseId }: { courseId: string }) {
       return;
     }
 
-    console.log(attendanceData);
     router.push(`/attendance/${courseId}/${dateToDateString(date)}`);
   };
   return (

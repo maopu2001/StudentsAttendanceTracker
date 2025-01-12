@@ -21,4 +21,4 @@ const CoursesSchema: Schema<ICourses> = new Schema({
   },
 });
 
-export default mongoose.models.Courses || mongoose.model<ICourses>('Courses', CoursesSchema);
+export default CoursesSchema;

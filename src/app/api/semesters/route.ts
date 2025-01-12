@@ -1,5 +1,5 @@
 import { connectDB } from '@/lib/connectDB';
-import Semesters from '@/schemas/semester';
+import { Semesters } from '@/schemas';
 import { NextResponse } from 'next/server';
 
 async function GET() {

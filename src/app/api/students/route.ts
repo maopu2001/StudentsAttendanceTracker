@@ -1,7 +1,6 @@
 import { connectDB } from '@/lib/connectDB';
 import { NextRequest, NextResponse } from 'next/server';
-import Students from '@/schemas/students';
-import Courses from '@/schemas/courses';
+import { Students, Courses } from '@/schemas';
 
 async function GET(req: NextRequest) {
   try {
@@ -12,7 +11,7 @@ async function GET(req: NextRequest) {
     const regNo = searchParams.get('regNo');
     if (courseId) {
       const course = await Courses.findById(courseId).populate('semester');
-      const students = await Students.find({ semester: course.semester });
+      const students = await Students.find({ semester: course?.semester });
       return NextResponse.json({ students, course }, { status: 200 });
     }
     if (studentId) {

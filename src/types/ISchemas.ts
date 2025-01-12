@@ -1,13 +1,13 @@
-import { Document, Schema } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export interface ICourses extends Document {
   title: string;
   courseCode: string;
   code: number;
-  semester: Schema.Types.ObjectId;
+  semester: Types.ObjectId;
 }
 
-export interface ISemester extends Document {
+export interface ISemesters extends Document {
   name: string;
   program: string;
 }
@@ -16,7 +16,7 @@ export interface IStudents extends Document {
   name: string;
   regNo: string;
   session: string;
-  semester: Schema.Types.ObjectId;
+  semester: Types.ObjectId;
 }
 
 export interface ITeachers extends Document {
@@ -24,13 +24,13 @@ export interface ITeachers extends Document {
   email: string;
   phone: string;
   designation: string;
-  courses: Schema.Types.ObjectId[];
+  courses: Types.ObjectId[];
 }
 
 export interface IAttendance extends Document {
-  student: Schema.Types.ObjectId;
-  course: Schema.Types.ObjectId;
-  semester: Schema.Types.ObjectId;
+  student: Types.ObjectId;
+  course: Types.ObjectId;
+  semester: Types.ObjectId;
   date: string;
-  status: 'present' | 'absent';
+  status: 'Present' | 'Absent';
 }
