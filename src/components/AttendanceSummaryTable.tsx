@@ -9,10 +9,10 @@ type Student = {
   total: number;
 };
 
-export default function AttendanceSummaryTable() {
+export default function AttendanceSummaryTable({ courseId }: { courseId: string }) {
   const { data: studentsData, isLoading } = useQuery({
     queryKey: ['students'],
-    queryFn: () => fetch('/api/students').then((res) => res.json()),
+    queryFn: () => fetch(`/api/students/attendanceSummary?courseId=${courseId}`).then((res) => res.json()),
   });
 
   if (isLoading) return <div>Loading...</div>;
